@@ -34,7 +34,7 @@ public class CoordInventario {
 		
 	public static void main(String[] args) throws IOException {
 		CoordInventario inv = new CoordInventario();
-		inv.cargarLotes("C:\\Users\\Lenovo\\eclipse-workspace\\Proyecto1\\EjemploArchInventario.csv");
+		inv.cargarLotes(System.getProperty("user.dir")+"\\EjemploArchInventario.csv");
 	}
 
 }
