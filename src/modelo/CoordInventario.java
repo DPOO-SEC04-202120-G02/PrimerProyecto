@@ -32,9 +32,11 @@ public class CoordInventario {
 		adminProductos.cargarProductos();
 	}
 		
-	public static void main(String[] args) throws IOException {
-		CoordInventario inv = new CoordInventario();
-		inv.cargarLotes(System.getProperty("user.dir")+"\\EjemploArchInventario.csv");
-	}
+	/*
+	 * public static void main(String[] args) throws IOException { CoordInventario
+	 * inv = new CoordInventario();
+	 * inv.cargarLotes(System.getProperty("user.dir")+"\\EjemploArchInventario.csv")
+	 * ; }
+	 */
 
 }
