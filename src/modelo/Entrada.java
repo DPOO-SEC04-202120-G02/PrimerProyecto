@@ -14,16 +14,16 @@ public class Entrada {
 		codigo_producto=codigo;
 	}
 	
-	float getPrecioT() {
+	public float getPrecioT() {
 		return precioT;
 	}
-	String getNombre_producto() {
+	public String getNombre_producto() {
 		return nombre_producto;
 	}
-	float getCantidad_producto() {
+	public float getCantidad_producto() {
 		return cantidad_producto;
 	}
-	int getCodigo() {
+	public int getCodigo() {
 		return codigo_producto;
 	}
 }

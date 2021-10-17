@@ -1,29 +1,66 @@
 package modelo;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public class ControladorCompra {
 	
-	Compra compra_actual;
+	private Compra compra_actual;
+	private AdminProductos admind_prod;
 	
 	public ControladorCompra() {
 		compra_actual= null;
+		admind_prod = new AdminProductos();
+		
+		try {
+			admind_prod.cargarProductos();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public void addEntrada(int codigo, float cantidad) {
-		//Se necesita el adminProductos para implementar esta funcionalidad.
+	public boolean addEntrada(int codigo, float cantidad) {
+		if (admind_prod.verificarCantidad(codigo, cantidad)) {
+			Producto prod = admind_prod.consultarProducto(codigo);
+			float precio=prod.getPrecioVenta()*cantidad;
+			compra_actual.addEntrada(precio, prod.getNombre(), cantidad, codigo);
+			try {
+				admind_prod.restarCantidad(codigo, cantidad);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return true;
+		}
+		return false;
 	}
 	
-	public void nuevaCompra(Cliente cliente_n) {
+	public boolean nuevaCompra(Cliente cliente_n) {
 		if (compra_actual!=null) {
-			System.out.println("Es necesario que cierre la compra actual antes de iniciar otra.");
+			return false;
 		}else{
 			compra_actual= new Compra(cliente_n);
-			System.out.println("Se ha iniado una nueva compra para el cliente con cedula "+Integer.toString(cliente_n.getCedula()));
+			return true;
 		}
 	}
 	
 	public Compra cerrarCompra() {//Se retorna la compra y se marca que no hay compras porcesandose.
 		Compra c= compra_actual;
-		compra_actual=null;
 		return c;
 	}
+	
+	public void set_compraAC2null() {
+		compra_actual=null;
+	}
+	
 }

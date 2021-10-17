@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import control.CoordinadorPos;
+import modelo.Compra;
+import modelo.Entrada;
 
 public class interfazApp {
 	
@@ -34,7 +36,22 @@ public class interfazApp {
 				{
 					System.out.println("Saliendo de la aplicacion ...");
 					continuar = false;
+				}else if (opcion_seleccionada == 2 )
+				{
+					int cedula = Integer.parseInt(input("Cedula del cliente que registra la compra."));
+					nuevaCompra(cedula);
+					
+				}else if (opcion_seleccionada == 3 )
+				{	
+					System.out.println("Ingrese los datos de la entrada que quiere hacer a su compra.");
+					int codigo = Integer.parseInt(input("Codigo del producto que desea comprar: "));
+					float cantidad = Float.valueOf(input("Cantidad del producto que desea comprar (si el producto se vende por empaques, se registra el entero más cercano al nuemro ingresado): "));
+					nuevaEntrada(codigo,cantidad);
+				}else if (opcion_seleccionada == 4 )
+				{
+					cerrarCompra();
 				}
+					
 				else if (this.CooPos == null)
 				{
 					System.out.println("Para poder ejecutar esta opcion hay que verificar el inicio del sistema.");
@@ -51,6 +68,34 @@ public class interfazApp {
 		}
 	}
 	
+	public void nuevaEntrada(int codigo, float cantidad) {
+		if(CooPos.addEntrada(codigo, cantidad)) {
+			System.out.println("Se ha registrado la entrada.");
+		}else {
+			System.out.println("Cantidad insuficiente en inventario.");
+		}
+	}
+	
+	public void nuevaCompra(int cedula) {
+		if (CooPos.nuevaCompra(cedula)){
+			System.out.println("Se ha iniado una nueva compra para el cliente con cedula "+Integer.toString(cedula));
+		}else {
+			System.out.println("No se pudó crear. Verifique que la cedula sea correcta y que no hayan compras procesandose actualmente");
+		}
+	}
+	
+	public void cerrarCompra() {
+		Compra compra=CooPos.cerrarCompra();
+		float precio_total=0;
+		System.out.printf("%-20s %-20s %-20s %-20s\n","Codigo","Nombre","Cantidad","Costo");
+		for (Entrada entrada : compra.getEntradas()) {
+			System.out.printf("%-20s %-20s %-20s %-20s\n", entrada.getCodigo(), entrada.getNombre_producto(),entrada.getCantidad_producto(),entrada.getPrecioT());
+			precio_total+=entrada.getPrecioT();
+		}
+		System.out.println("Costo final de la compra: "+String.valueOf(precio_total));
+		CooPos.set_compraAC2null();
+	}
+	
 	public void registrarCliente() {
 		int cedula_new = Integer.parseInt(input("Cedula del nuevo cliente: "));
 		int edad_new = Integer.parseInt(input("Edad del nuevo cliente: "));
@@ -63,6 +108,9 @@ public class interfazApp {
 	public void mostrarMenu() {
 		System.out.println("\nOpciones del sistema Pos.\n");
 		System.out.println("1. Registrar cliente.\n");
+		System.out.println("2. Registrar una nueva compra.\n");
+		System.out.println("3. Registrar una nueva entrada a la compra actual.\n");
+		System.out.println("4. Cerrar la compra actual e imprimir la factura.\n");
 	}
 	
 	public String input(String mensaje)

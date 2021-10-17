@@ -3,7 +3,7 @@ package modelo;
 import java.io.Serializable;
 
 public class Cliente implements Serializable {
-	private int puntos;
+	private float puntos;
 	private int cedula;
 	private int edad;
 	private String sexo;
@@ -19,11 +19,11 @@ public class Cliente implements Serializable {
 		this.puntos=0;//Todos los clientes se crean con 0 puntos.
 	}
 	
-	public int getPuntos() {
+	public float getPuntos() {
 		return puntos;
 	}
 	
-	public void sumarPuntos(int cantidad) {
+	public void sumarPuntos(float cantidad) {
 		puntos += cantidad;
 	}
 	

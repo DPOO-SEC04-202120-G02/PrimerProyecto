@@ -29,7 +29,11 @@ public class Compra {
 	}
 	
 	public Cliente getCliente() {
-		return cliente;
+		return this.cliente;
+	}
+	
+	public List<Entrada> getEntradas(){
+		return this.entradas;
 	}
 	
 }

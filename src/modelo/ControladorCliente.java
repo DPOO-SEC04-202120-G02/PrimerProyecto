@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class ControladorCliente {
 	
@@ -34,7 +35,12 @@ public class ControladorCliente {
 	}
 	
 	public void SumarPuntos(Compra compra, Cliente cliente) {
-		//Falta implementar
+		float precio_total=0;
+		for (Entrada entrada : compra.getEntradas()) {
+			precio_total+=entrada.getPrecioT();
+		}
+		float puntos = precio_total/1000;
+		cliente.sumarPuntos(puntos);
 	}
 	
 }
