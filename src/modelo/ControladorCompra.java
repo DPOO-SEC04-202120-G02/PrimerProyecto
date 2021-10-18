@@ -26,9 +26,10 @@ public class ControladorCompra {
 		}
 	}
 
-	public boolean addEntrada(int codigo, float cantidad) {
+	public boolean addEntrada(int codigo, float cantidad) throws FileNotFoundException, ClassNotFoundException, IOException {
+		admind_prod.cargarProductos();
+		Producto prod = admind_prod.consultarProducto(codigo);
 		if (admind_prod.verificarCantidad(codigo, cantidad)) {
-			Producto prod = admind_prod.consultarProducto(codigo);
 			float precio=prod.getPrecioVenta()*cantidad;
 			compra_actual.addEntrada(precio, prod.getNombre(), cantidad, codigo);
 			try {

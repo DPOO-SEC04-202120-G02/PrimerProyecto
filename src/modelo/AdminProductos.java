@@ -32,7 +32,7 @@ public class AdminProductos {
 			int idProducto = Integer.parseInt(partes[0]);
 			String nombreProducto = partes[1];
 			boolean empacado = false;
-			if (partes[2] == "empacado") {
+			if (partes[2].equals("empacado")) {
 				empacado = true;
 			}
 			int numLote = Integer.parseInt(partes[3]);
@@ -72,14 +72,11 @@ public class AdminProductos {
 		br.close();
 	}
 	
-	public void eliminarLotesVencidos(Fecha fechaActual) throws FileNotFoundException, IOException{
-		Set<Integer> setOfKeys = productos.keySet();
-		for (Integer idProducto: setOfKeys) {
-			Producto producto = productos.get(idProducto);
-			boolean eliminacion = producto.eliminarLotesVencidos(fechaActual);
-			if (eliminacion == true) {
-				persistencia.crearProducto(producto);
-			}
+	public void eliminarLotesVencidos(int idProducto, Fecha fechaActual) throws FileNotFoundException, IOException{
+		Producto producto = productos.get(idProducto);
+		boolean eliminacion = producto.eliminarLotesVencidos(fechaActual);
+		if (eliminacion == true) {
+			persistencia.crearProducto(producto);
 		}
 	}
 	

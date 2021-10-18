@@ -9,6 +9,7 @@ public class Producto implements Serializable {
 	private float precioVenta;
 	private float gananciaVenta;
 	private boolean empacado;
+	private float perdidos;
 	private ArrayList<Lote> lotes;
 	private ArrayList<String> categorias;
 	
@@ -22,6 +23,10 @@ public class Producto implements Serializable {
 	
 	public int getCodigo() {
 		return codigo;
+	}
+	
+	public boolean getEmpacado() {
+		return empacado;
 	}
 	
 	public String getNombre() {
@@ -52,19 +57,25 @@ public class Producto implements Serializable {
 		lotes.add(lote);
 	}
 	
+	public float getPerdidos(){
+		return perdidos;
+	}
+	
 	public void addCategoria(String nombreCategoria) {
 		categorias.add(nombreCategoria);
 	}
 	
 	public boolean eliminarLotesVencidos(Fecha fechaActual) {
 		boolean retorno = false;
-		for (Lote lote: lotes) {
-			Fecha fechaVencimiento = lote.getFechaVencimiento();
-			if (fechaVencimiento.compFecha(fechaVencimiento) == true) {
-				lotes.remove(lote);
+		for (Iterator<Lote> iterator = lotes.iterator(); iterator.hasNext();) {
+		    Lote lote = iterator.next();
+		    Fecha fechaVencimiento = lote.getFechaVencimiento();
+			if (fechaVencimiento.compFecha(fechaActual) == true) {
+				perdidos += lote.getCantidad();
+				iterator.remove();
 				retorno = true;
-				}
-			}
+		    }
+		}
 		return retorno;
 	}
 	

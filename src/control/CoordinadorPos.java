@@ -1,5 +1,8 @@
 package control;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import modelo.Cliente;
 import modelo.Compra;
 import modelo.ControladorCliente;
@@ -15,7 +18,7 @@ public class CoordinadorPos {
 		ctrl_compra=new ControladorCompra();
 	}
 	
-	public boolean addEntrada(int codigo, float cantidad) {
+	public boolean addEntrada(int codigo, float cantidad) throws FileNotFoundException, ClassNotFoundException, IOException {
 		return ctrl_compra.addEntrada(codigo, cantidad);
 	}
 	

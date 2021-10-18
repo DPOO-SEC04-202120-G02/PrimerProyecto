@@ -1,5 +1,6 @@
-package modelo;
+package control;
 import java.io.FileNotFoundException;
+import modelo.*;
 import java.io.IOException;
 
 public class CoordInventario {
@@ -18,9 +19,9 @@ public class CoordInventario {
 		return adminProductos.consultarProducto(codigo);
 	}
 	
-	public void eliminarLotesVencidos(int dia, int mes, int año) throws FileNotFoundException, IOException {
+	public void eliminarLotesVencidos(int idProducto, int dia, int mes, int año) throws FileNotFoundException, IOException {
 		Fecha fechaActual = new Fecha(dia, mes, año);
-		adminProductos.eliminarLotesVencidos(fechaActual);
+		adminProductos.eliminarLotesVencidos(idProducto, fechaActual);
 	}
 	
 	public float consultarDesempeñoFin(int codigo) {
