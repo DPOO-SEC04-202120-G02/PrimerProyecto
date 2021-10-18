@@ -31,10 +31,16 @@ public class CoordInventario {
 	public void cargarProductos() throws FileNotFoundException, ClassNotFoundException, IOException {
 		adminProductos.cargarProductos();
 	}
-		
+	
+	public void test() {
+		adminProductos.test();
+	}
+	
 	public static void main(String[] args) throws IOException {
 		CoordInventario inv = new CoordInventario();
 		inv.cargarLotes("C:\\Users\\Lenovo\\eclipse-workspace\\Proyecto1\\EjemploArchInventario.csv");
+		inv.eliminarLotesVencidos(14, 01, 2022);
+		inv.test();
 	}
 
 }

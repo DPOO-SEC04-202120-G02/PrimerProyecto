@@ -58,13 +58,14 @@ public class Producto implements Serializable {
 	
 	public boolean eliminarLotesVencidos(Fecha fechaActual) {
 		boolean retorno = false;
-		for (Lote lote: lotes) {
-			Fecha fechaVencimiento = lote.getFechaVencimiento();
-			if (fechaVencimiento.compFecha(fechaVencimiento) == true) {
-				lotes.remove(lote);
+		for (Iterator<Lote> iterator = lotes.iterator(); iterator.hasNext();) {
+		    Lote lote = iterator.next();
+		    Fecha fechaVencimiento = lote.getFechaVencimiento();
+			if (fechaVencimiento.compFecha(fechaActual) == true) {
+				iterator.remove();
 				retorno = true;
-				}
-			}
+		    }
+		}
 		return retorno;
 	}
 	

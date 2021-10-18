@@ -102,4 +102,13 @@ public class AdminProductos {
 		producto.restarCantidad(cantidad);
 		persistencia.crearProducto(producto);
 	}
+	
+	public void test() {
+		Set<Integer> setOfKeys = productos.keySet();
+		for (Integer idProducto: setOfKeys) {
+			Producto producto = productos.get(idProducto);
+			System.out.println(producto.getNombre());
+			System.out.println(producto.contarCantidad());
+		}
+	}	
 }
