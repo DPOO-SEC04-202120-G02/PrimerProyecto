@@ -25,11 +25,20 @@ public class AdminProductos {
 	    BufferedReader br = persistencia.cargarLotes(nombreArchivo);
 	    br.readLine();
 		String linea = br.readLine();
+		HashMap<Integer, Integer> registroCSV = new HashMap<Integer, Integer>();
 	
 		while (linea != null) 
 		{
 			String[] partes = linea.split(",");
 			int idProducto = Integer.parseInt(partes[0]);
+			if (registroCSV.containsKey(idProducto)) {
+				Integer actualizacion = registroCSV.get(idProducto);
+				actualizacion += 1;
+				registroCSV.replace(idProducto, actualizacion);
+			}
+			else {
+				registroCSV.put(idProducto, 1);
+			}
 			String nombreProducto = partes[1];
 			boolean empacado = false;
 			if (partes[2].equals("empacado")) {
@@ -70,6 +79,7 @@ public class AdminProductos {
 		}
 
 		br.close();
+		
 	}
 	
 	public void eliminarLotesVencidos(int idProducto, Fecha fechaActual) throws FileNotFoundException, IOException{

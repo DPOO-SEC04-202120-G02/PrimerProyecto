@@ -29,7 +29,7 @@ public class interfazApp {
 			{
 				mostrarMenuDireccionamiento();
 				
-				int opcion_seleccionada = Integer.parseInt(input("Por favor digite la opción que desea utilizar :"));
+				int opcion_seleccionada = Integer.parseInt(input("Por favor digite la opción que desea utilizar: "));
 				if (opcion_seleccionada == 1) {
 					ejecutarAplicacionPos();
 				}
@@ -67,21 +67,21 @@ public class interfazApp {
 			{
 				mostrarMenuPos();
 				// mostrarSistemas_POS_SI_Integrados();
-				int opcion_seleccionada = Integer.parseInt(input("Por favor seleccione una opcion"));
+				int opcion_seleccionada = Integer.parseInt(input("Por favor seleccione una opcion: "));
 				if (opcion_seleccionada == 1 && this.CooPos != null)
 					registrarCliente();
 				else if (opcion_seleccionada == 5 )
 				{
-					System.out.println("Saliendo de la aplicacion ...");
+					System.out.println("\nSaliendo de la aplicacion ...");
 					continuar = false;
 				}else if (opcion_seleccionada == 2 )
 				{
-					int cedula = Integer.parseInt(input("Cedula del cliente que registra la compra."));
+					int cedula = Integer.parseInt(input("\nCedula del cliente que registra la compra: "));
 					nuevaCompra(cedula);
 					
 				}else if (opcion_seleccionada == 3 )
 				{	
-					System.out.println("Ingrese los datos de la entrada que quiere hacer a su compra.");
+					System.out.println("\nIngrese los datos de la entrada que quiere hacer a su compra.");
 					int codigo = Integer.parseInt(input("Codigo del producto que desea comprar: "));
 					float cantidad = Float.valueOf(input("Cantidad del producto que desea comprar (si el producto se vende por empaques, se registra el entero más cercano al nuemro ingresado): "));
 					try {
@@ -93,7 +93,6 @@ public class interfazApp {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}else if (opcion_seleccionada == 4 )
@@ -128,9 +127,9 @@ public class interfazApp {
 			try
 			{
 				mostrarMenuInv();
-				int opcion_seleccionada = Integer.parseInt(input("Por favor seleccione una opcion: "));
+				int opcion_seleccionada = Integer.parseInt(input("Por favor seleccione una opcion. "));
 				if (opcion_seleccionada == 1 && this.cooInv != null) {
-					String rutaArchivo = input("Por favor digite la ruta del archivo que desea leer: ");
+					String rutaArchivo = input("Por favor el nombre del archivo que desea leer: ");
 					cooInv.cargarLotes(rutaArchivo);
 				}
 				else if (opcion_seleccionada == 2) {
@@ -183,9 +182,9 @@ public class interfazApp {
 	
 	public void nuevaCompra(int cedula) {
 		if (CooPos.nuevaCompra(cedula)){
-			System.out.println("Se ha iniado una nueva compra para el cliente con cedula "+Integer.toString(cedula));
+			System.out.println("Se ha iniado una nueva compra para el cliente con cedula: "+Integer.toString(cedula));
 		}else {
-			System.out.println("No se pudó crear. Verifique que la cedula sea correcta y que no hayan compras procesandose actualmente");
+			System.out.println("No se pudo crear. Verifique que la cedula sea correcta y que no hayan compras procesándose actualmente.");
 		}
 	}
 	
@@ -206,18 +205,18 @@ public class interfazApp {
 		int edad_new = Integer.parseInt(input("Edad del nuevo cliente: "));
 		String sexo_new = input("Sexo del nuevo cliente: ");
 		String EstadoCivil_new = input("Estado civil del nuevo cliente: ");
-		String Empleo_new = input("situacion laboral del nuevo cliente: ");
+		String Empleo_new = input("Situación laboral del nuevo cliente: ");
 		CooPos.registrarCliente(cedula_new, edad_new, sexo_new, EstadoCivil_new, Empleo_new);
 	}
 	
 	public void mostrarMenuDireccionamiento() {
-		System.out.println("\nVISTA DE DIRECCIONAMIENTO.\n");
+		System.out.println("\nVISTA DE DIRECCIONAMIENTO\n");
 		System.out.println("1. Sistema POS.\n");
 		System.out.println("2. Sistema Inventario.\n");
 	}
 	
 	public void mostrarMenuPos() {
-		System.out.println("\nVISTA SISTEMA POS.\n");
+		System.out.println("\nVISTA SISTEMA POS\n");
 		System.out.println("1. Registrar cliente.\n");
 		System.out.println("2. Registrar una nueva compra.\n");
 		System.out.println("3. Registrar una nueva entrada a la compra actual.\n");
@@ -226,7 +225,7 @@ public class interfazApp {
 	}
 	
 	public void mostrarMenuInv() {
-		System.out.println("\nVISTA SISTEMA INVENTARIO.\n");
+		System.out.println("\nVISTA SISTEMA INVENTARIO\n");
 		System.out.println("1. Cargar lotes desde un archivo.\n");
 		System.out.println("2. Eliminar los lotes vencidos de un producto.\n");
 		System.out.println("3. Consultar el desempeño financiero de un producto.\n");
@@ -245,7 +244,7 @@ public class interfazApp {
 		}
 		catch (IOException e)
 		{
-			System.out.println("Error leyendo de la consola");
+			System.out.println("Error leyendo de la consola.");
 			e.printStackTrace();
 		}
 		return null;
@@ -259,7 +258,7 @@ public class interfazApp {
 		}
 		catch (Exception e)
 		{
-			System.out.println("Problema al crear la consola de la aplicacion: " + e.getMessage());
+			e.printStackTrace();
 		}
 	}
 

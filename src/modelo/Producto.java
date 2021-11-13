@@ -72,6 +72,7 @@ public class Producto implements Serializable {
 		    Fecha fechaVencimiento = lote.getFechaVencimiento();
 			if (fechaVencimiento.compFecha(fechaActual) == true) {
 				perdidos += lote.getCantidad();
+				gananciaVenta -= (lote.getCantidad()*lote.getPrecioCompra());
 				iterator.remove();
 				retorno = true;
 		    }
